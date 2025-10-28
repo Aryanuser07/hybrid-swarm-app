@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  vote:
+    image: dockersamples/examplevotingapp_vote:before
+    ports:
+      - "5000:80"
+    networks:
+      - vote-net
+
+  redis:
+    image: redis:3.2
+    networks:
+      - vote-net
+
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    networks:
+      - vote-net
+
+  db:
+    image: postgres:9.4
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - vote-net
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  result:
+    image: dockersamples/examplevotingapp_result:before
+    ports:
+      - "5001:80"
+    networks:
+      - vote-net
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+
+networks:
+  vote-net:
