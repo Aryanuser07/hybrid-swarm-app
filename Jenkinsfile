@@ -16,7 +16,7 @@ pipeline {
         stage('Deploy to Swarm') {
             steps {
                 // This command now runs on your host, but targets the VM
-                sh 'docker stack deploy -c docker-compose.yml hybrid_app'
+                bat 'docker stack deploy -c docker-compose.yml hybrid_app'
             }
         }
     }
