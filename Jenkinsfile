@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Tells Jenkins to target the Docker daemon inside your VM
-        DOCKER_HOST = 'tcp://172.26.28.247:2375'
+        DOCKER_HOST = 'tcp://192.168.1.18:2375'
     }
 
     stages {
